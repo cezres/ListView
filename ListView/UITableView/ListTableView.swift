@@ -29,6 +29,10 @@ public class ListTableView: UIView {
         addSubview(tableView)
     }
     
+    public init(frame: CGRect, style: UITableView.Style) {
+        super.init(frame: frame)
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -65,6 +69,11 @@ extension ListTableView: UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         items[indexPath.row].contentSize(for: tableView).height
+    }
+    
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        items[indexPath.row].didSelectItem()
     }
     
 }

@@ -17,17 +17,21 @@ class ViewController: UIViewController {
         view.addSubview(listView)
         
         let items: [CustomListViewCellModel] = [
-            .init(color: .brown),
-            .init(color: .black),
-            .init(color: .gray),
-            .init(color: .cyan),
-            .init(color: .orange),
+            .init(color: .brown, action: didSelectItem),
+            .init(color: .black, action: didSelectItem),
+            .init(color: .gray, action: didSelectItem),
+            .init(color: .cyan, action: didSelectItem),
+            .init(color: .orange, action: didSelectItem),
         ]
         listView.data = items
     }
 
 //    lazy var listView = ListCollectionView(frame: view.bounds)
     lazy var listView = ListTableView(frame: view.bounds)
+
+    func didSelectItem(_ model: CustomListViewCellModel) {
+        print(model.color)
+    }
 }
 
 struct CustomListViewCellModel: ListViewCellModel {
@@ -35,6 +39,8 @@ struct CustomListViewCellModel: ListViewCellModel {
     typealias View = CustomListTableViewCell
     
     let color: UIColor
+    
+    var action: (CustomListViewCellModel) -> Void
 }
 
 class CustomListCollectionViewCell: ListCollectionViewCell<CustomListViewCellModel> {

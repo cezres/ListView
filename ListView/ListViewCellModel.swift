@@ -16,10 +16,14 @@ public protocol AnyListViewCellModel {
 extension AnyListViewCellModel {
     public var reuseIdentifier: String { Self.reuseIdentifier }
     public var cellClass: AnyListViewCell.Type { Self.cellClass }
+    
+    func didSelectItem() { }
 }
 
 public protocol ListViewCellModel: AnyListViewCellModel {
     associatedtype View: ListViewCell
+    
+    var action: (Self) -> Void { get }
 }
 
 extension ListViewCellModel {
@@ -29,8 +33,12 @@ extension ListViewCellModel {
     public func contentSize(for contentView: UIView) -> CGSize {
         return .init(width: contentView.bounds.width, height: View.contentHeight(for: self))
     }
-}
-
-public protocol ListViewCellModelAction {
-    var action: () -> Void { get }
+    
+    public var action: (Self) -> Void {
+        { _ in }
+    }
+    
+    func didSelectItem() {
+        action(self)
+    }
 }
