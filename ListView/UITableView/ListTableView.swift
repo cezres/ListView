@@ -6,18 +6,20 @@
 //
 
 import UIKit
+import DifferenceKit
 
 public class ListTableView: UIView {
-
-    public var data: ListViewData? {
+    
+    public var data: ListViewDataSource? {
         didSet {
-            tableView.reloadData()
+            data?.refresh().done(on: .main) { [weak self] result in
+                self?.reloadData(data: result)
+            }.catch { error in
+            }
         }
     }
     
-    private var items: [AnyListViewCellModel] {
-        data?.items ?? []
-    }
+    private var items: [AnyListViewCellModel] = []
 
     public init() {
         super.init(frame: .init(x: 0, y: 0, width: 0, height: 0))
@@ -53,8 +55,31 @@ public class ListTableView: UIView {
 
 }
 
-extension ListTableView: UITableViewDataSource {
+extension ListTableView {
     
+    func reloadData(data: [AnyListViewCellModel]) {
+        guard let newData = data as? [ListViewCellModelDifferentiable & AnyListViewCellModel],
+              let oldData = items as? [AnyDifferenceListViewCellModel] else {
+            tableView.reloadData()
+            return
+        }
+        
+        let changeset = StagedChangeset(
+            source: oldData,
+            target: newData.map {
+                AnyDifferenceListViewCellModel(model: $0)
+            }
+        )
+
+        tableView.reload(using: changeset, with: .none) { result in
+            self.items = result
+        }
+    }
+    
+}
+
+extension ListTableView: UITableViewDataSource {
+
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         items.count
     }
@@ -68,7 +93,7 @@ extension ListTableView: UITableViewDataSource {
 extension ListTableView: UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        items[indexPath.row].contentSize(for: tableView).height
+        items[indexPath.row].contentHeight(for: tableView)
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

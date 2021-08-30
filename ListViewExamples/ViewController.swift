@@ -7,43 +7,71 @@
 
 import UIKit
 import ListView
+import DifferenceKit
+import SnapKit
 
 class ViewController: UIViewController {
     
+    lazy var listView = ListCollectionView(frame: view.bounds)
+    
+    lazy var items: [CustomListViewCellModel] = [] {
+        didSet {
+            listView.data = items
+        }
+    }
+    
+    deinit {
+        print(#function)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         view.backgroundColor = .white
         view.addSubview(listView)
+        listView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
         
-        let items: [CustomListViewCellModel] = [
-            .init(color: .brown, action: didSelectItem),
-            .init(color: .black, action: didSelectItem),
-            .init(color: .gray, action: didSelectItem),
-            .init(color: .cyan, action: didSelectItem),
-            .init(color: .orange, action: didSelectItem),
-        ]
-        listView.data = items
-    }
+        let weakDidSelectItem: (CustomListViewCellModel) -> Void = { [weak self](_ model: CustomListViewCellModel) in
+            self?.didSelectItem(model)
+        }
 
-//    lazy var listView = ListCollectionView(frame: view.bounds)
-    lazy var listView = ListTableView(frame: view.bounds)
+        items = [
+            .init(color: .brown, action: weakDidSelectItem),
+            .init(color: .black, action: weakDidSelectItem),
+            .init(color: .gray, action: weakDidSelectItem),
+            .init(color: .cyan, action: weakDidSelectItem),
+            .init(color: .orange, action: weakDidSelectItem),
+        ]
+    }
 
     func didSelectItem(_ model: CustomListViewCellModel) {
         print(model.color)
     }
+
 }
 
-struct CustomListViewCellModel: ListViewCellModel {
-//    typealias View = CustomListCollectionViewCell
-    typealias View = CustomListTableViewCell
+struct CustomListViewCellModel: ListViewCellModel, ListViewCellModelDifferentiable {
+    
+    typealias View = CustomListCollectionViewCell
     
     let color: UIColor
     
     var action: (CustomListViewCellModel) -> Void
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(color)
+    }
+    
+    func didSelectItem() {
+        action(self)
+    }
+
 }
 
 class CustomListCollectionViewCell: ListCollectionViewCell<CustomListViewCellModel> {
+    
     override class func contentHeight(for model: CustomListViewCellModel) -> CGFloat {
         44 + CGFloat(arc4random_uniform(60))
     }
@@ -51,14 +79,5 @@ class CustomListCollectionViewCell: ListCollectionViewCell<CustomListViewCellMod
     override func setup(_ model: CustomListViewCellModel) {
         contentView.backgroundColor = model.color
     }
-}
-
-class CustomListTableViewCell: ListTableViewCell<CustomListViewCellModel> {
-    override class func contentHeight(for model: CustomListViewCellModel) -> CGFloat {
-        44 + CGFloat(arc4random_uniform(60))
-    }
     
-    override func setup(_ model: CustomListViewCellModel) {
-        contentView.backgroundColor = model.color
-    }
 }

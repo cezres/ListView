@@ -1,0 +1,41 @@
+PODS:
+  - DifferenceKit (1.2.0):
+    - DifferenceKit/Core (= 1.2.0)
+    - DifferenceKit/UIKitExtension (= 1.2.0)
+  - DifferenceKit/Core (1.2.0)
+  - DifferenceKit/UIKitExtension (1.2.0):
+    - DifferenceKit/Core
+  - PromiseKit (6.15.3):
+    - PromiseKit/CorePromise (= 6.15.3)
+    - PromiseKit/Foundation (= 6.15.3)
+    - PromiseKit/UIKit (= 6.15.3)
+  - PromiseKit/CorePromise (6.15.3)
+  - PromiseKit/Foundation (6.15.3):
+    - PromiseKit/CorePromise
+  - PromiseKit/UIKit (6.15.3):
+    - PromiseKit/CorePromise
+  - SnapKit (5.0.1)
+  - SwiftLint (0.43.1)
+
+DEPENDENCIES:
+  - DifferenceKit
+  - PromiseKit
+  - SnapKit
+  - SwiftLint
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - DifferenceKit
+    - PromiseKit
+    - SnapKit
+    - SwiftLint
+
+SPEC CHECKSUMS:
+  DifferenceKit: 5659c430bb7fe45876fa32ce5cba5d6167f0c805
+  PromiseKit: 3b2b6995e51a954c46dbc550ce3da44fbfb563c5
+  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
+
+PODFILE CHECKSUM: bf33c40b82a9cbfcfefb2442899e6660ae311db1
+
+COCOAPODS: 1.10.1

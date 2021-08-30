@@ -1,16 +1,11 @@
 //
-//  ListViewCell.swift
+//  CellView.swift
 //  ListView
 //
-//  Created by azusa on 2021/7/19.
+//  Created by azusa on 2021/8/13.
 //
 
 import UIKit
-
-public protocol AnyListViewCell: NSObjectProtocol {
-    static func contentHeight(for model: AnyListViewCellModel) -> CGFloat
-    @discardableResult func setup(_ model: AnyListViewCellModel) -> Self
-}
 
 public protocol ListViewCell: AnyListViewCell {
     associatedtype Model: AnyListViewCellModel
@@ -18,6 +13,7 @@ public protocol ListViewCell: AnyListViewCell {
     var model: Model? { get set }
     
     static func contentHeight(for model: Model) -> CGFloat
+
     func setup(_ model: Model)
 }
 
@@ -30,13 +26,14 @@ extension ListViewCell {
         }
     }
 
-    @discardableResult
-    public func setup(_ model: AnyListViewCellModel) -> Self {
+    public func setup(_ model: AnyListViewCellModel) {
         if let model = model as? Model {
             self.model = model
             setup(model)
+        } else if let differenceModel = model as? AnyDifferenceListViewCellModel, let model = differenceModel.model as? Model {
+            self.model = model
+            setup(model)
         }
-        return self
     }
     
     public func setup(_ model: Model) {

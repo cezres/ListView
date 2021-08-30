@@ -7,14 +7,14 @@
 
 import UIKit
 
-class ListView: UIView {
+protocol ListView {
+    var items: [[AnyListViewCellModel]] { get set }
+    
+    var dataSource: ListViewDataSource { get set }
+}
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+extension ListView where Self: UICollectionView {
+    func reloadData(_ items: [[AnyListViewCellModel]]) {
+        
     }
-    */
-
 }

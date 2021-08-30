@@ -15,7 +15,7 @@ open class ListTableViewCell<T: ListViewCellModel>: UITableViewCell, ListViewCel
     open var model: T?
     
     open class func contentHeight(for model: T) -> CGFloat {
-        return 0
+        0
     }
     
     open func setup(_ model: T) {

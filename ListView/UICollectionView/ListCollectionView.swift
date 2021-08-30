@@ -6,18 +6,19 @@
 //
 
 import UIKit
+import DifferenceKit
 
 public class ListCollectionView: UIView {
-    
-    public var data: ListViewData? {
+    public var data: ListViewDataSource? {
         didSet {
-            collectionView.reloadData()
+            data?.refresh().done(on: .main) { [weak self] result in
+                self?.reloadData(data: result)
+            }.catch { error in
+            }
         }
     }
     
-    private var items: [AnyListViewCellModel] {
-        data?.items ?? []
-    }
+    private var items: [AnyListViewCellModel] = []
 
     public init() {
         super.init(frame: .init(x: 0, y: 0, width: 0, height: 0))
@@ -38,7 +39,14 @@ public class ListCollectionView: UIView {
         collectionView.frame = bounds
     }
     
-    lazy var collectionView: UICollectionView = {
+    public override var backgroundColor: UIColor? {
+        didSet {
+            super.backgroundColor = backgroundColor
+            collectionView.backgroundColor = backgroundColor
+        }
+    }
+    
+    public lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 0
         let collectionView = UICollectionView(frame: bounds, collectionViewLayout: layout)
@@ -47,6 +55,30 @@ public class ListCollectionView: UIView {
         collectionView.backgroundColor = .white
         return collectionView
     }()
+}
+
+extension ListCollectionView {
+    func reloadData(data: [AnyListViewCellModel]) {
+        guard let newData = data as? [ListViewCellModelDifferentiable & AnyListViewCellModel],
+              let oldData = items as? [AnyDifferenceListViewCellModel] else {
+            collectionView.reloadData()
+            return
+        }
+        
+        let changeset = StagedChangeset(
+            source: oldData,
+            target: newData.map {
+                AnyDifferenceListViewCellModel(model: $0)
+            }
+        )
+
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        collectionView.reload(using: changeset) { result in
+            self.items = result
+        }
+        CATransaction.commit()
+    }
 }
 
 extension ListCollectionView: UICollectionViewDataSource {
@@ -61,10 +93,20 @@ extension ListCollectionView: UICollectionViewDataSource {
 
 extension ListCollectionView: UICollectionViewDelegateFlowLayout {
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        items[indexPath.row].contentSize(for: collectionView)
+        .init(width: collectionView.frame.width, height: items[indexPath.row].contentHeight(for: collectionView))
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if (data?.hasMoreData ?? false) && indexPath.row > items.count - 4 {
+            data?.loadMore().done { [weak self] result in
+                self?.reloadData(data: result)
+            }.catch { error in
+            }
+        }
     }
     
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
+        items[indexPath.row].didSelectItem()
     }
 }
