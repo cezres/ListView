@@ -8,9 +8,7 @@
 import Foundation
 
 extension Array: ListViewDataSource where Element: AnyListViewCellModel {
-    
     public var items: [AnyListViewCellModel] {
         self
     }
-    
 }

@@ -2,4 +2,4 @@
 excluded:
     - Pods
 
-line_length: 150
+line_length: 200

@@ -10,22 +10,18 @@ import class PromiseKit.Promise
 
 public protocol ListViewDataSource {
     var items: [AnyListViewCellModel] { get }
-    
+
     var hasMoreData: Bool { get }
-    
+
     func refresh() -> Promise<[AnyListViewCellModel]>
-    
+
     func loadMore() -> Promise<[AnyListViewCellModel]>
-    
-    func fetch(start: Int, limit: Int) -> Promise<[AnyListViewCellModel]>
 }
 
 extension ListViewDataSource {
     public var hasMoreData: Bool { false }
-    
+
     public func refresh() -> Promise<[AnyListViewCellModel]> { .init(resolver: { $0.fulfill(items) }) }
-    
+
     public func loadMore() -> Promise<[AnyListViewCellModel]> { .init(resolver: { $0.fulfill(items) }) }
-    
-    public func fetch(start: Int, limit: Int) -> Promise<[AnyListViewCellModel]> { .init(resolver: { $0.fulfill(items) }) }
 }

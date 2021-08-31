@@ -9,9 +9,9 @@ import UIKit
 
 public protocol ListViewCell: AnyListViewCell {
     associatedtype Model: AnyListViewCellModel
-    
+
     var model: Model? { get set }
-    
+
     static func contentHeight(for model: Model) -> CGFloat
 
     func setup(_ model: Model)
@@ -35,7 +35,7 @@ extension ListViewCell {
             setup(model)
         }
     }
-    
+
     public func setup(_ model: Model) {
         self.model = model
     }

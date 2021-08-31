@@ -10,21 +10,22 @@ import SnapKit
 import DifferenceKit
 
 public class ListScrollView: UIView {
-    
-    public var data: [AnyListViewCellModel] = [] {
+    public var dataSource: [AnyListViewCellModel] = [] {
         didSet {
-            reloadData(data: data)
+            reloadData(data: dataSource)
         }
     }
-    
-    private var items: [AnyListViewCellModel] = []
+
+    private var data: [AnyListViewCellModel] = []
+
     private var cells: [AnyListScrollViewCell] = []
+
     private var caches: [[String: AnyListScrollViewCell]] = []
-    
+
     func dequeueReusableCell(withModel model: AnyListViewCellModel) -> AnyListScrollViewCell {
         let cls: AnyClass = model.cellClass
         let cell: AnyListScrollViewCell
-        
+
         if let index = caches.firstIndex(where: { $0.keys.first == model.reuseIdentifier }), let result = caches.remove(at: index).values.first {
             cell = result
         } else if let result = cls.alloc() as? AnyListScrollViewCell {
@@ -37,14 +38,14 @@ public class ListScrollView: UIView {
         cell.setup(model)
         return cell
     }
-    
+
     func cacheReusableCell(withCell cell: AnyListScrollViewCell, for model: AnyListViewCellModel) {
         caches.insert([model.reuseIdentifier: cell], at: 0)
         if caches.count > 10 {
             _ = caches.dropLast()
         }
     }
-    
+
     public override func layoutSubviews() {
         super.layoutSubviews()
         cells.enumerated().forEach { (index, cell) in
@@ -60,58 +61,57 @@ public class ListScrollView: UIView {
 
 // MARK: Load Data
 extension ListScrollView {
-    
     func reloadData(data: [AnyListViewCellModel]) {
         if case .none = window {
             if let data = data as? [ListViewCellModelDifferentiable & AnyListViewCellModel] {
-                items = data.map { AnyDifferenceListViewCellModel(model: $0) }
+                self.data = data.map { AnyDifferenceListViewCellModel(model: $0) }
             } else {
-                items = data
+                self.data = data
             }
-            cells = items.map { dequeueReusableCell(withModel: $0) }
+            cells = data.map { dequeueReusableCell(withModel: $0) }
             setNeedsLayout()
             return
         }
-        
+
         guard let newData = data as? [ListViewCellModelDifferentiable & AnyListViewCellModel],
-              let oldData = items as? [AnyDifferenceListViewCellModel] else {
+              let oldData = data as? [AnyDifferenceListViewCellModel] else {
             cells.enumerated().forEach {
-                cacheReusableCell(withCell: $0.element, for: items[$0.offset])
+                cacheReusableCell(withCell: $0.element, for: data[$0.offset])
                 $0.element.removeFromSuperview()
             }
-            
-            items = data
-            cells = items.map { dequeueReusableCell(withModel: $0) }
+
+            self.data = data
+            cells = data.map { dequeueReusableCell(withModel: $0) }
             setNeedsLayout()
             return
         }
-        
+
         let changeset = StagedChangeset(
             source: oldData,
             target: newData.map {
                 AnyDifferenceListViewCellModel(model: $0)
             }
         )
-        
+
         reload(using: changeset)
     }
-    
+
     func reload(using stagedChangeset: StagedChangeset<[AnyDifferenceListViewCellModel]>) {
         for changeset in stagedChangeset {
-            let oldDatas = items
-            items = changeset.data
+            let oldData = data
+            data = changeset.data
 
             if !changeset.elementDeleted.isEmpty {
                 changeset.elementDeleted.reversed().forEach {
                     let cell = cells.remove(at: $0.element)
                     cell.removeFromSuperview()
-                    cacheReusableCell(withCell: cell, for: oldDatas[$0.element])
+                    cacheReusableCell(withCell: cell, for: oldData[$0.element])
                 }
             }
 
             if !changeset.elementInserted.isEmpty {
                 changeset.elementInserted.forEach {
-                    let view = dequeueReusableCell(withModel: items[$0.element])
+                    let view = dequeueReusableCell(withModel: data[$0.element])
                     cells.insert(view, at: $0.element)
                 }
             }
@@ -120,9 +120,9 @@ extension ListScrollView {
                 changeset.elementUpdated.forEach {
                     let oldCell = cells.remove(at: $0.element)
                     oldCell.removeFromSuperview()
-                    cacheReusableCell(withCell: oldCell, for: oldDatas[$0.element])
-                    
-                    let newCell = dequeueReusableCell(withModel: items[$0.element])
+                    cacheReusableCell(withCell: oldCell, for: oldData[$0.element])
+
+                    let newCell = dequeueReusableCell(withModel: data[$0.element])
                     cells.insert(newCell, at: $0.element)
                 }
             }
@@ -134,9 +134,7 @@ extension ListScrollView {
         }
         setNeedsLayout()
     }
-    
 }
-
 
 // MARK: Empty View
 struct EmptyListScrollViewCellModel: ListViewCellModel {
@@ -147,7 +145,7 @@ class EmptyListScrollViewCell: ListScrollViewCell<EmptyListScrollViewCellModel> 
     override class func contentHeight(for model: EmptyListScrollViewCellModel) -> CGFloat {
         20
     }
-    
+
     func setup(_ model: AnyListViewCellModel) {
         backgroundColor = .white
     }

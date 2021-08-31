@@ -11,13 +11,13 @@ public typealias AnyListTableViewCell = UITableViewCell & AnyListViewCell
 
 open class ListTableViewCell<T: ListViewCellModel>: UITableViewCell, ListViewCell {
     public typealias Model = T
-    
+
     open var model: T?
-    
+
     open class func contentHeight(for model: T) -> CGFloat {
         0
     }
-    
+
     open func setup(_ model: T) {
     }
 }

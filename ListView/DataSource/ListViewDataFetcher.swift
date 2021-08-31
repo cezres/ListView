@@ -9,20 +9,19 @@ import Foundation
 import PromiseKit
 
 open class ListViewDataFetcher: ListViewDataSource {
-    
     enum Error: Swift.Error {
         case loading
         case noMoreData
     }
-    
+
     open private(set) var items = [AnyListViewCellModel]()
-    
+
     public private(set) var hasMoreData = false
-    
+
     public private(set) var loading = false
-    
+
     public private(set) var start = 0
-    
+
     public var limit = 10
 
     @discardableResult
@@ -30,7 +29,7 @@ open class ListViewDataFetcher: ListViewDataSource {
         guard !loading else {
             return .init(error: Error.loading)
         }
-        
+
         loading = true
         return .init { (resolver) in
             fetch(start: 0, limit: limit).done { result in
@@ -71,7 +70,6 @@ open class ListViewDataFetcher: ListViewDataSource {
     }
 
     open func fetch(start: Int, limit: Int) -> Promise<[AnyListViewCellModel]> {
-        fatalError()
+        fatalError("fetch(start:limit:) has not been implemented")
     }
-    
 }

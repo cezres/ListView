@@ -14,12 +14,12 @@ public protocol AnyListViewCellModel {
     var cellClass: AnyListViewCell.Type { get }
 
     func contentHeight(for contentView: UIView) -> CGFloat
-    
+
     func didSelectItem()
 }
 
 extension AnyListViewCellModel {
     public var reuseIdentifier: String { String(describing: Self.self) }
-    
+
     public func didSelectItem() {}
 }
