@@ -16,6 +16,10 @@ extension AnyListViewCellModel where Self: ListViewCellModelDifferentiable {
 }
 
 struct AnyDifferenceListViewCellModel: AnyListViewCellModel, Hashable, Differentiable {
+    var reuseIdentifier: String {
+        model.reuseIdentifier
+    }
+    
     var cellClass: AnyListViewCell.Type {
         model.cellClass
     }

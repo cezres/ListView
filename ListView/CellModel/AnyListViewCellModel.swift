@@ -10,9 +10,9 @@ import UIKit
 
 public protocol AnyListViewCellModel {
     var reuseIdentifier: String { get }
-    
+
     var cellClass: AnyListViewCell.Type { get }
-    
+
     func contentHeight(for contentView: UIView) -> CGFloat
     
     func didSelectItem()

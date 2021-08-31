@@ -8,7 +8,6 @@ use_frameworks!
 pod 'SnapKit'
 pod 'DifferenceKit'
 pod 'PromiseKit'
-pod 'SwiftLint'
 
 target 'ListView' do
 end

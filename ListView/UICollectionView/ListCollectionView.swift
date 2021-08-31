@@ -9,6 +9,7 @@ import UIKit
 import DifferenceKit
 
 public class ListCollectionView: UIView {
+    
     public var data: ListViewDataSource? {
         didSet {
             data?.refresh().done(on: .main) { [weak self] result in
@@ -55,12 +56,15 @@ public class ListCollectionView: UIView {
         collectionView.backgroundColor = .white
         return collectionView
     }()
+    
 }
 
 extension ListCollectionView {
+    
     func reloadData(data: [AnyListViewCellModel]) {
         guard let newData = data as? [ListViewCellModelDifferentiable & AnyListViewCellModel],
               let oldData = items as? [AnyDifferenceListViewCellModel] else {
+            items = data
             collectionView.reloadData()
             return
         }
@@ -79,9 +83,11 @@ extension ListCollectionView {
         }
         CATransaction.commit()
     }
+    
 }
 
 extension ListCollectionView: UICollectionViewDataSource {
+    
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         items.count
     }
@@ -89,6 +95,7 @@ extension ListCollectionView: UICollectionViewDataSource {
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         collectionView.dequeueReusableCell(withModel: items[indexPath.row], for: indexPath)
     }
+    
 }
 
 extension ListCollectionView: UICollectionViewDelegateFlowLayout {

@@ -31,6 +31,10 @@
 		7A99E93526D63321005BE102 /* Array+ListViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A99E93426D63321005BE102 /* Array+ListViewDataSource.swift */; };
 		7A99E93726D63336005BE102 /* ListViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A99E93626D63336005BE102 /* ListViewDataSource.swift */; };
 		7A99E93926D63358005BE102 /* ListViewDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A99E93826D63358005BE102 /* ListViewDataFetcher.swift */; };
+		7A99EC8F26DC7FF9005BE102 /* ListScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A99EC8E26DC7FF8005BE102 /* ListScrollView.swift */; };
+		7A99EC9126DC82F4005BE102 /* ListScrollViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A99EC9026DC82F4005BE102 /* ListScrollViewCell.swift */; };
+		7A99EC9326DC83F3005BE102 /* ScrollViewExanpleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A99EC9226DC83F3005BE102 /* ScrollViewExanpleViewController.swift */; };
+		7A99EC9F26DCB277005BE102 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A99EC9E26DCB276005BE102 /* Extensions.swift */; };
 		7CF90F540D4CA0CDE7F51554 /* Pods_ListViewExamples.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F5B424F7332C8581158D2FB /* Pods_ListViewExamples.framework */; };
 		CC9EFFF446A37D91465831D9 /* Pods_ListView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 605D54A19EBC9CFDD285D6DC /* Pods_ListView.framework */; };
 /* End PBXBuildFile section */
@@ -89,6 +93,11 @@
 		7A99E93426D63321005BE102 /* Array+ListViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+ListViewDataSource.swift"; sourceTree = "<group>"; };
 		7A99E93626D63336005BE102 /* ListViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewDataSource.swift; sourceTree = "<group>"; };
 		7A99E93826D63358005BE102 /* ListViewDataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewDataFetcher.swift; sourceTree = "<group>"; };
+		7A99EC8E26DC7FF8005BE102 /* ListScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListScrollView.swift; sourceTree = "<group>"; };
+		7A99EC9026DC82F4005BE102 /* ListScrollViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListScrollViewCell.swift; sourceTree = "<group>"; };
+		7A99EC9226DC83F3005BE102 /* ScrollViewExanpleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewExanpleViewController.swift; sourceTree = "<group>"; };
+		7A99EC9E26DCB276005BE102 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		7A99ECA726DE2E90005BE102 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		860644639635C1D426CD4385 /* Pods-ListView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ListView.release.xcconfig"; path = "Target Support Files/Pods-ListView/Pods-ListView.release.xcconfig"; sourceTree = "<group>"; };
 		96886AAF2863627164078561 /* Pods-ListView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ListView.debug.xcconfig"; path = "Target Support Files/Pods-ListView/Pods-ListView.debug.xcconfig"; sourceTree = "<group>"; };
 		C498E90A93B1568DF1DBADBD /* Pods-ListViewExamples.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ListViewExamples.release.xcconfig"; path = "Target Support Files/Pods-ListViewExamples/Pods-ListViewExamples.release.xcconfig"; sourceTree = "<group>"; };
@@ -118,6 +127,7 @@
 		7A7C7FDE26A54E5F009190CA = {
 			isa = PBXGroup;
 			children = (
+				7A99ECA726DE2E90005BE102 /* .swiftlint.yml */,
 				7A7C7FEA26A54E5F009190CA /* ListView */,
 				7A7C7FF826A54E85009190CA /* ListViewExamples */,
 				7A7C7FE926A54E5F009190CA /* Products */,
@@ -138,6 +148,7 @@
 		7A7C7FEA26A54E5F009190CA /* ListView */ = {
 			isa = PBXGroup;
 			children = (
+				7A99EC8D26DC7FE9005BE102 /* UIScrollView */,
 				7A7C801D26A56357009190CA /* UICollectionView */,
 				7A7C801E26A56357009190CA /* UITableView */,
 				7A99E68426C64522005BE102 /* CellModel */,
@@ -156,6 +167,8 @@
 				7A7C7FF926A54E85009190CA /* AppDelegate.swift */,
 				7A7C7FFB26A54E85009190CA /* SceneDelegate.swift */,
 				7A7C7FFD26A54E85009190CA /* ViewController.swift */,
+				7A99EC9226DC83F3005BE102 /* ScrollViewExanpleViewController.swift */,
+				7A99EC9E26DCB276005BE102 /* Extensions.swift */,
 				7A7C7FFF26A54E85009190CA /* Main.storyboard */,
 				7A7C800226A54E87009190CA /* Assets.xcassets */,
 				7A7C800426A54E87009190CA /* LaunchScreen.storyboard */,
@@ -222,6 +235,15 @@
 			path = DataSource;
 			sourceTree = "<group>";
 		};
+		7A99EC8D26DC7FE9005BE102 /* UIScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				7A99EC8E26DC7FF8005BE102 /* ListScrollView.swift */,
+				7A99EC9026DC82F4005BE102 /* ListScrollViewCell.swift */,
+			);
+			path = UIScrollView;
+			sourceTree = "<group>";
+		};
 		EDC0963C80B684375BA0FA27 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -276,6 +298,7 @@
 				7A7C7FF526A54E85009190CA /* Resources */,
 				7A7C801026A54EA7009190CA /* Embed Frameworks */,
 				CA03BC3533196E873F848209 /* [CP] Embed Pods Frameworks */,
+				7A99ECA826DE2EC2005BE102 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -345,6 +368,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		7A99ECA826DE2EC2005BE102 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
 		9D1923329C7A01CAC3F914D9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -418,6 +458,8 @@
 				7A99E68B26C64595005BE102 /* ListViewCellModelDifferentiable.swift in Sources */,
 				7A7C801A26A551F1009190CA /* UICollectionViewExtensions.swift in Sources */,
 				7A99E68726C64546005BE102 /* AnyListViewCellModel.swift in Sources */,
+				7A99EC9126DC82F4005BE102 /* ListScrollViewCell.swift in Sources */,
+				7A99EC8F26DC7FF9005BE102 /* ListScrollView.swift in Sources */,
 				7A99E68F26C645F1005BE102 /* ListViewCell.swift in Sources */,
 				7A99E93926D63358005BE102 /* ListViewDataFetcher.swift in Sources */,
 				7A99E93726D63336005BE102 /* ListViewDataSource.swift in Sources */,
@@ -435,8 +477,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A99EC9F26DCB277005BE102 /* Extensions.swift in Sources */,
 				7A7C7FFE26A54E85009190CA /* ViewController.swift in Sources */,
 				7A7C7FFA26A54E85009190CA /* AppDelegate.swift in Sources */,
+				7A99EC9326DC83F3005BE102 /* ScrollViewExanpleViewController.swift in Sources */,
 				7A7C7FFC26A54E85009190CA /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

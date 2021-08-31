@@ -12,14 +12,8 @@ import SnapKit
 
 class ViewController: UIViewController {
     
-    lazy var listView = ListCollectionView(frame: view.bounds)
-    
-    lazy var items: [CustomListViewCellModel] = [] {
-        didSet {
-            listView.data = items
-        }
-    }
-    
+    lazy var tableView = ListTableView(frame: view.bounds)
+        
     deinit {
         print(#function)
     }
@@ -27,57 +21,58 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        title = "Examples"
         view.backgroundColor = .white
-        view.addSubview(listView)
-        listView.snp.makeConstraints {
+        view.addSubview(tableView)
+        tableView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
         
-        let weakDidSelectItem: (CustomListViewCellModel) -> Void = { [weak self](_ model: CustomListViewCellModel) in
-            self?.didSelectItem(model)
-        }
-
-        items = [
-            .init(color: .brown, action: weakDidSelectItem),
-            .init(color: .black, action: weakDidSelectItem),
-            .init(color: .gray, action: weakDidSelectItem),
-            .init(color: .cyan, action: weakDidSelectItem),
-            .init(color: .orange, action: weakDidSelectItem),
+        tableView.data = [
+            TableViewCellModel(text: "UIScrollView", action: { [weak self] in
+                self.unsafelyUnwrapped
+                    .navigationController
+                    .unsafelyUnwrapped
+                    .pushViewController(ScrollViewExanpleViewController(), animated: true)
+            }),
         ]
     }
-
-    func didSelectItem(_ model: CustomListViewCellModel) {
-        print(model.color)
-    }
-
+    
 }
 
-struct CustomListViewCellModel: ListViewCellModel, ListViewCellModelDifferentiable {
+struct TableViewCellModel: ListViewCellModel {
     
-    typealias View = CustomListCollectionViewCell
+    typealias View = TableViewCell
     
-    let color: UIColor
+    let text: String
     
-    var action: (CustomListViewCellModel) -> Void
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(color)
-    }
-    
+    var action: (TableViewCellModel) -> Void
+        
     func didSelectItem() {
         action(self)
     }
+    
+    init(text: String, action: @escaping () -> Void) {
+        self.init(text: text) { model in
+            action()
+        }
+    }
+    
+    init(text: String, action: @escaping (TableViewCellModel) -> Void) {
+        self.text = text
+        self.action = action
+    }
 
 }
 
-class CustomListCollectionViewCell: ListCollectionViewCell<CustomListViewCellModel> {
+class TableViewCell: ListTableViewCell<TableViewCellModel> {
     
-    override class func contentHeight(for model: CustomListViewCellModel) -> CGFloat {
-        44 + CGFloat(arc4random_uniform(60))
+    override class func contentHeight(for model: TableViewCellModel) -> CGFloat {
+        64
     }
     
-    override func setup(_ model: CustomListViewCellModel) {
-        contentView.backgroundColor = model.color
+    override func setup(_ model: TableViewCellModel) {
+        textLabel?.text = model.text
     }
     
 }

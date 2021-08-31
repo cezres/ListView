@@ -60,6 +60,7 @@ extension ListTableView {
     func reloadData(data: [AnyListViewCellModel]) {
         guard let newData = data as? [ListViewCellModelDifferentiable & AnyListViewCellModel],
               let oldData = items as? [AnyDifferenceListViewCellModel] else {
+            items = data
             tableView.reloadData()
             return
         }
