@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SnapKit
 import DifferenceKit
 
 public class ListScrollView: UIView {
@@ -23,12 +22,11 @@ public class ListScrollView: UIView {
     private var caches: [[String: AnyListScrollViewCell]] = []
 
     func dequeueReusableCell(withModel model: AnyListViewCellModel) -> AnyListScrollViewCell {
-        let cls: AnyClass = model.cellClass
         let cell: AnyListScrollViewCell
 
         if let index = caches.firstIndex(where: { $0.keys.first == model.reuseIdentifier }), let result = caches.remove(at: index).values.first {
             cell = result
-        } else if let result = cls.alloc() as? AnyListScrollViewCell {
+        } else if let result = (model.cellClass as AnyClass).alloc() as? AnyListScrollViewCell {
             result.perform(#selector(UIView.init(frame:)), with: CGRect.zero)
             cell = result
         } else {
@@ -63,6 +61,11 @@ public class ListScrollView: UIView {
 extension ListScrollView {
     func reloadData(data: [AnyListViewCellModel]) {
         if case .none = window {
+            cells.enumerated().forEach {
+                cacheReusableCell(withCell: $0.element, for: self.data[$0.offset])
+                $0.element.removeFromSuperview()
+            }
+
             if let data = data as? [ListViewCellModelDifferentiable & AnyListViewCellModel] {
                 self.data = data.map { AnyDifferenceListViewCellModel(model: $0) }
             } else {
@@ -76,7 +79,7 @@ extension ListScrollView {
         guard let newData = data as? [ListViewCellModelDifferentiable & AnyListViewCellModel],
               let oldData = data as? [AnyDifferenceListViewCellModel] else {
             cells.enumerated().forEach {
-                cacheReusableCell(withCell: $0.element, for: data[$0.offset])
+                cacheReusableCell(withCell: $0.element, for: self.data[$0.offset])
                 $0.element.removeFromSuperview()
             }
 

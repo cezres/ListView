@@ -11,7 +11,6 @@ import DifferenceKit
 import SnapKit
 
 class ViewController: UIViewController {
-
     lazy var tableView = ListTableView(frame: view.bounds)
 
     deinit {
@@ -37,11 +36,9 @@ class ViewController: UIViewController {
             })
         ]
     }
-
 }
 
 struct TableViewCellModel: ListViewCellModel {
-
     typealias View = TableViewCell
 
     let text: String
@@ -62,11 +59,9 @@ struct TableViewCellModel: ListViewCellModel {
         self.text = text
         self.action = action
     }
-
 }
 
 class TableViewCell: ListTableViewCell<TableViewCellModel> {
-
     override class func contentHeight(for model: TableViewCellModel) -> CGFloat {
         64
     }
@@ -74,5 +69,4 @@ class TableViewCell: ListTableViewCell<TableViewCellModel> {
     override func setup(_ model: TableViewCellModel) {
         textLabel?.text = model.text
     }
-
 }

@@ -9,7 +9,6 @@ import UIKit
 import ListView
 
 class ScrollViewExanpleViewController: UIViewController {
-
     let scrollView = ListScrollView()
 
     override func viewDidLoad() {
@@ -33,6 +32,15 @@ class ScrollViewExanpleViewController: UIViewController {
             ScrollViewModelA(color: .green)
         ]
 
+        self.scrollView.dataSource = [
+            ScrollViewModelA(color: .black),
+            ScrollViewModelA(color: .orange),
+            ScrollViewModelB(text: "AA"),
+            ScrollViewModelB(text: "CC"),
+            ScrollViewModelA(color: .cyan),
+            ScrollViewModelA(color: .green)
+        ]
+
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             self.scrollView.dataSource = [
                 ScrollViewModelA(color: .orange),
@@ -43,7 +51,6 @@ class ScrollViewExanpleViewController: UIViewController {
             ]
         }
     }
-
 }
 
 private struct ScrollViewModelA: ListViewCellModel, ListViewCellModelDifferentiable {
@@ -64,19 +71,9 @@ private class ScrollViewCellA: ListScrollViewCell<ScrollViewModelA> {
     override func setup(_ model: ScrollViewModelA) {
         backgroundColor = model.color
     }
-
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        print(#function)
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
 }
 
 private struct ScrollViewModelB: ListViewCellModel, ListViewCellModelDifferentiable {
-
     typealias View = ScrollViewCellB
 
     let text: String
@@ -87,7 +84,6 @@ private struct ScrollViewModelB: ListViewCellModel, ListViewCellModelDifferentia
 }
 
 private class ScrollViewCellB: ListScrollViewCell<ScrollViewModelB> {
-
     override class func contentHeight(for model: ScrollViewModelB) -> CGFloat {
         44
     }
@@ -111,5 +107,4 @@ private class ScrollViewCellB: ListScrollViewCell<ScrollViewModelB> {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
 }
