@@ -67,6 +67,7 @@
 		1927814B4F96A40A358476EE /* Pods-ListViewExamples.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ListViewExamples.debug.xcconfig"; path = "Target Support Files/Pods-ListViewExamples/Pods-ListViewExamples.debug.xcconfig"; sourceTree = "<group>"; };
 		1F5B424F7332C8581158D2FB /* Pods_ListViewExamples.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ListViewExamples.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		605D54A19EBC9CFDD285D6DC /* Pods_ListView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ListView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A75AF0926DF205E00A52349 /* ListView.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = ListView.podspec; sourceTree = "<group>"; };
 		7A7C7FE826A54E5F009190CA /* ListView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ListView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A7C7FEB26A54E5F009190CA /* ListView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ListView.h; sourceTree = "<group>"; };
 		7A7C7FEC26A54E5F009190CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -127,6 +128,7 @@
 		7A7C7FDE26A54E5F009190CA = {
 			isa = PBXGroup;
 			children = (
+				7A75AF0926DF205E00A52349 /* ListView.podspec */,
 				7A99ECA726DE2E90005BE102 /* .swiftlint.yml */,
 				7A7C7FEA26A54E5F009190CA /* ListView */,
 				7A7C7FF826A54E85009190CA /* ListViewExamples */,
