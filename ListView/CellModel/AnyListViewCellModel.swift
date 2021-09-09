@@ -11,11 +11,13 @@ import UIKit
 public protocol AnyListViewCellModel {
     var reuseIdentifier: String { get }
 
-    var cellClass: AnyListViewCell.Type { get }
+    var cellClass: UIView.Type { get }
 
     func contentHeight(for contentView: UIView) -> CGFloat
 
     func didSelectItem()
+
+    func setup(in view: UIView)
 }
 
 extension AnyListViewCellModel {

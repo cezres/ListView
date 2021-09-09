@@ -24,74 +24,72 @@ class ScrollViewExanpleViewController: UIViewController {
         }
 
         scrollView.dataSource = [
-            ScrollViewModelA(color: .black),
-            ScrollViewModelA(color: .orange),
-            ScrollViewModelB(text: "AA"),
-            ScrollViewModelB(text: "BB"),
-            ScrollViewModelA(color: .cyan),
-            ScrollViewModelA(color: .green)
+            ColorCellModel(color: .black),
+            ColorCellModel(color: .orange),
+            TextCellModel(text: "AA"),
+            TextCellModel(text: "BB"),
+            ColorCellModel(color: .cyan),
+            ColorCellModel(color: .green)
         ]
 
         self.scrollView.dataSource = [
-            ScrollViewModelA(color: .black),
-            ScrollViewModelA(color: .orange),
-            ScrollViewModelB(text: "AA"),
-            ScrollViewModelB(text: "CC"),
-            ScrollViewModelA(color: .cyan),
-            ScrollViewModelA(color: .green)
+            ColorCellModel(color: .black),
+            ColorCellModel(color: .orange),
+            TextCellModel(text: "AA"),
+            TextCellModel(text: "CC"),
+            ColorCellModel(color: .cyan),
+            ColorCellModel(color: .green)
         ]
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             self.scrollView.dataSource = [
-                ScrollViewModelA(color: .orange),
-                ScrollViewModelA(color: .black),
-                ScrollViewModelA(color: .red),
-                ScrollViewModelB(text: "CC"),
-                ScrollViewModelB(text: "DD")
+                ColorCellModel(color: .orange),
+                ColorCellModel(color: .black),
+                ColorCellModel(color: .red),
+                TextCellModel(text: "CC"),
+                TextCellModel(text: "DD")
             ]
         }
     }
 }
 
-private struct ScrollViewModelA: ListViewCellModel, ListViewCellModelDifferentiable {
-    typealias View = ScrollViewCellA
+private struct ColorCellModel: ListViewCellModel, ListViewCellModelDifferentiable {
+    typealias View = UIView
 
     let color: UIColor
 
     func hash(into hasher: inout Hasher) {
         hasher.combine(color)
     }
-}
 
-private class ScrollViewCellA: ListScrollViewCell<ScrollViewModelA> {
-    override class func contentHeight(for model: ScrollViewModelA) -> CGFloat {
+    func contentHeight(for contentView: UIView) -> CGFloat {
         100
     }
 
-    override func setup(_ model: ScrollViewModelA) {
-        backgroundColor = model.color
+    func setup(in view: UIView) {
+        view.backgroundColor = color
     }
 }
 
-private struct ScrollViewModelB: ListViewCellModel, ListViewCellModelDifferentiable {
-    typealias View = ScrollViewCellB
-
-    let text: String
+private struct TextCellModel: ListViewCellModel, ListViewCellModelDifferentiable {
+    typealias View = TextView
 
     func hash(into hasher: inout Hasher) {
         hasher.combine(text)
     }
-}
 
-private class ScrollViewCellB: ListScrollViewCell<ScrollViewModelB> {
-    override class func contentHeight(for model: ScrollViewModelB) -> CGFloat {
+    func contentHeight(for contentView: UIView) -> CGFloat {
         44
     }
 
-    override func setup(_ model: ScrollViewModelB) {
-        textLabel.text = model.text
+    func setup(in view: TextView) {
+        view.textLabel.text = text
     }
 
+    let text: String
+}
+
+private class TextView: UIView {
     let textLabel = UILabel()
 
     override init(frame: CGRect) {

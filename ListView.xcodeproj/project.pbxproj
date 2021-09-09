@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7A75B2F726E9E2FE00A52349 /* CollectionViewExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A75B2F626E9E2FE00A52349 /* CollectionViewExampleViewController.swift */; };
 		7A7C7FED26A54E5F009190CA /* ListView.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A7C7FEB26A54E5F009190CA /* ListView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7A7C7FFA26A54E85009190CA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7C7FF926A54E85009190CA /* AppDelegate.swift */; };
 		7A7C7FFC26A54E85009190CA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7C7FFB26A54E85009190CA /* SceneDelegate.swift */; };
@@ -21,18 +22,13 @@
 		7A7C801C26A554BF009190CA /* ListCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7C801B26A554BF009190CA /* ListCollectionView.swift */; };
 		7A7C802026A5636D009190CA /* ListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7C801F26A5636D009190CA /* ListTableView.swift */; };
 		7A7C802226A5637E009190CA /* UITableViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7C802126A5637E009190CA /* UITableViewExtensions.swift */; };
-		7A7C802426A5643B009190CA /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7C802326A5643B009190CA /* ListTableViewCell.swift */; };
-		7A7C802626A5658D009190CA /* ListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7C802526A5658D009190CA /* ListCollectionViewCell.swift */; };
 		7A99E68726C64546005BE102 /* AnyListViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A99E68626C64546005BE102 /* AnyListViewCellModel.swift */; };
 		7A99E68926C64574005BE102 /* ListViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A99E68826C64574005BE102 /* ListViewCellModel.swift */; };
 		7A99E68B26C64595005BE102 /* ListViewCellModelDifferentiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A99E68A26C64595005BE102 /* ListViewCellModelDifferentiable.swift */; };
-		7A99E68D26C645CD005BE102 /* AnyListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A99E68C26C645CD005BE102 /* AnyListViewCell.swift */; };
-		7A99E68F26C645F1005BE102 /* ListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A99E68E26C645F1005BE102 /* ListViewCell.swift */; };
 		7A99E93526D63321005BE102 /* Array+ListViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A99E93426D63321005BE102 /* Array+ListViewDataSource.swift */; };
 		7A99E93726D63336005BE102 /* ListViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A99E93626D63336005BE102 /* ListViewDataSource.swift */; };
 		7A99E93926D63358005BE102 /* ListViewDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A99E93826D63358005BE102 /* ListViewDataFetcher.swift */; };
 		7A99EC8F26DC7FF9005BE102 /* ListScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A99EC8E26DC7FF8005BE102 /* ListScrollView.swift */; };
-		7A99EC9126DC82F4005BE102 /* ListScrollViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A99EC9026DC82F4005BE102 /* ListScrollViewCell.swift */; };
 		7A99EC9326DC83F3005BE102 /* ScrollViewExanpleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A99EC9226DC83F3005BE102 /* ScrollViewExanpleViewController.swift */; };
 		7A99EC9F26DCB277005BE102 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A99EC9E26DCB276005BE102 /* Extensions.swift */; };
 		7CF90F540D4CA0CDE7F51554 /* Pods_ListViewExamples.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F5B424F7332C8581158D2FB /* Pods_ListViewExamples.framework */; };
@@ -68,6 +64,7 @@
 		1F5B424F7332C8581158D2FB /* Pods_ListViewExamples.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ListViewExamples.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		605D54A19EBC9CFDD285D6DC /* Pods_ListView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ListView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A75AF0926DF205E00A52349 /* ListView.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = ListView.podspec; sourceTree = "<group>"; };
+		7A75B2F626E9E2FE00A52349 /* CollectionViewExampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewExampleViewController.swift; sourceTree = "<group>"; };
 		7A7C7FE826A54E5F009190CA /* ListView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ListView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A7C7FEB26A54E5F009190CA /* ListView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ListView.h; sourceTree = "<group>"; };
 		7A7C7FEC26A54E5F009190CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -84,18 +81,13 @@
 		7A7C801B26A554BF009190CA /* ListCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionView.swift; sourceTree = "<group>"; };
 		7A7C801F26A5636D009190CA /* ListTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableView.swift; sourceTree = "<group>"; };
 		7A7C802126A5637E009190CA /* UITableViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewExtensions.swift; sourceTree = "<group>"; };
-		7A7C802326A5643B009190CA /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
-		7A7C802526A5658D009190CA /* ListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionViewCell.swift; sourceTree = "<group>"; };
 		7A99E68626C64546005BE102 /* AnyListViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyListViewCellModel.swift; sourceTree = "<group>"; };
 		7A99E68826C64574005BE102 /* ListViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewCellModel.swift; sourceTree = "<group>"; };
 		7A99E68A26C64595005BE102 /* ListViewCellModelDifferentiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewCellModelDifferentiable.swift; sourceTree = "<group>"; };
-		7A99E68C26C645CD005BE102 /* AnyListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyListViewCell.swift; sourceTree = "<group>"; };
-		7A99E68E26C645F1005BE102 /* ListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewCell.swift; sourceTree = "<group>"; };
 		7A99E93426D63321005BE102 /* Array+ListViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+ListViewDataSource.swift"; sourceTree = "<group>"; };
 		7A99E93626D63336005BE102 /* ListViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewDataSource.swift; sourceTree = "<group>"; };
 		7A99E93826D63358005BE102 /* ListViewDataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewDataFetcher.swift; sourceTree = "<group>"; };
 		7A99EC8E26DC7FF8005BE102 /* ListScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListScrollView.swift; sourceTree = "<group>"; };
-		7A99EC9026DC82F4005BE102 /* ListScrollViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListScrollViewCell.swift; sourceTree = "<group>"; };
 		7A99EC9226DC83F3005BE102 /* ScrollViewExanpleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewExanpleViewController.swift; sourceTree = "<group>"; };
 		7A99EC9E26DCB276005BE102 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		7A99ECA726DE2E90005BE102 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
@@ -154,7 +146,6 @@
 				7A7C801D26A56357009190CA /* UICollectionView */,
 				7A7C801E26A56357009190CA /* UITableView */,
 				7A99E68426C64522005BE102 /* CellModel */,
-				7A99E68526C64523005BE102 /* CellView */,
 				7A99E93326D63304005BE102 /* DataSource */,
 				7A7C801126A54EB6009190CA /* ListView.swift */,
 				7A7C7FEB26A54E5F009190CA /* ListView.h */,
@@ -170,6 +161,7 @@
 				7A7C7FFB26A54E85009190CA /* SceneDelegate.swift */,
 				7A7C7FFD26A54E85009190CA /* ViewController.swift */,
 				7A99EC9226DC83F3005BE102 /* ScrollViewExanpleViewController.swift */,
+				7A75B2F626E9E2FE00A52349 /* CollectionViewExampleViewController.swift */,
 				7A99EC9E26DCB276005BE102 /* Extensions.swift */,
 				7A7C7FFF26A54E85009190CA /* Main.storyboard */,
 				7A7C800226A54E87009190CA /* Assets.xcassets */,
@@ -192,7 +184,6 @@
 			isa = PBXGroup;
 			children = (
 				7A7C801926A551F1009190CA /* UICollectionViewExtensions.swift */,
-				7A7C802526A5658D009190CA /* ListCollectionViewCell.swift */,
 				7A7C801B26A554BF009190CA /* ListCollectionView.swift */,
 			);
 			path = UICollectionView;
@@ -202,7 +193,6 @@
 			isa = PBXGroup;
 			children = (
 				7A7C802126A5637E009190CA /* UITableViewExtensions.swift */,
-				7A7C802326A5643B009190CA /* ListTableViewCell.swift */,
 				7A7C801F26A5636D009190CA /* ListTableView.swift */,
 			);
 			path = UITableView;
@@ -216,15 +206,6 @@
 				7A99E68A26C64595005BE102 /* ListViewCellModelDifferentiable.swift */,
 			);
 			path = CellModel;
-			sourceTree = "<group>";
-		};
-		7A99E68526C64523005BE102 /* CellView */ = {
-			isa = PBXGroup;
-			children = (
-				7A99E68C26C645CD005BE102 /* AnyListViewCell.swift */,
-				7A99E68E26C645F1005BE102 /* ListViewCell.swift */,
-			);
-			path = CellView;
 			sourceTree = "<group>";
 		};
 		7A99E93326D63304005BE102 /* DataSource */ = {
@@ -241,7 +222,6 @@
 			isa = PBXGroup;
 			children = (
 				7A99EC8E26DC7FF8005BE102 /* ListScrollView.swift */,
-				7A99EC9026DC82F4005BE102 /* ListScrollViewCell.swift */,
 			);
 			path = UIScrollView;
 			sourceTree = "<group>";
@@ -460,15 +440,10 @@
 				7A99E68B26C64595005BE102 /* ListViewCellModelDifferentiable.swift in Sources */,
 				7A7C801A26A551F1009190CA /* UICollectionViewExtensions.swift in Sources */,
 				7A99E68726C64546005BE102 /* AnyListViewCellModel.swift in Sources */,
-				7A99EC9126DC82F4005BE102 /* ListScrollViewCell.swift in Sources */,
 				7A99EC8F26DC7FF9005BE102 /* ListScrollView.swift in Sources */,
-				7A99E68F26C645F1005BE102 /* ListViewCell.swift in Sources */,
 				7A99E93926D63358005BE102 /* ListViewDataFetcher.swift in Sources */,
 				7A99E93726D63336005BE102 /* ListViewDataSource.swift in Sources */,
-				7A7C802426A5643B009190CA /* ListTableViewCell.swift in Sources */,
-				7A7C802626A5658D009190CA /* ListCollectionViewCell.swift in Sources */,
 				7A7C801226A54EB6009190CA /* ListView.swift in Sources */,
-				7A99E68D26C645CD005BE102 /* AnyListViewCell.swift in Sources */,
 				7A7C802226A5637E009190CA /* UITableViewExtensions.swift in Sources */,
 				7A99E68926C64574005BE102 /* ListViewCellModel.swift in Sources */,
 				7A99E93526D63321005BE102 /* Array+ListViewDataSource.swift in Sources */,
@@ -481,6 +456,7 @@
 			files = (
 				7A99EC9F26DCB277005BE102 /* Extensions.swift in Sources */,
 				7A7C7FFE26A54E85009190CA /* ViewController.swift in Sources */,
+				7A75B2F726E9E2FE00A52349 /* CollectionViewExampleViewController.swift in Sources */,
 				7A7C7FFA26A54E85009190CA /* AppDelegate.swift in Sources */,
 				7A99EC9326DC83F3005BE102 /* ScrollViewExanpleViewController.swift in Sources */,
 				7A7C7FFC26A54E85009190CA /* SceneDelegate.swift in Sources */,

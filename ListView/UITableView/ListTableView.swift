@@ -57,7 +57,7 @@ public class ListTableView: UIView {
 extension ListTableView {
     func reloadData(data: [AnyListViewCellModel]) {
         guard let newData = data as? [ListViewCellModelDifferentiable & AnyListViewCellModel],
-              let oldData = data as? [AnyDifferenceListViewCellModel] else {
+              let oldData = self.data as? [AnyDifferenceListViewCellModel] else {
             self.data = data
             tableView.reloadData()
             return

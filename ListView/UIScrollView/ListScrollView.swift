@@ -17,27 +17,27 @@ public class ListScrollView: UIView {
 
     private var data: [AnyListViewCellModel] = []
 
-    private var cells: [AnyListScrollViewCell] = []
+    private var cells: [UIView] = []
 
-    private var caches: [[String: AnyListScrollViewCell]] = []
+    private var caches: [[String: UIView]] = []
 
-    func dequeueReusableCell(withModel model: AnyListViewCellModel) -> AnyListScrollViewCell {
-        let cell: AnyListScrollViewCell
+    func dequeueReusableCell(withModel model: AnyListViewCellModel) -> UIView {
+        let cell: UIView
 
         if let index = caches.firstIndex(where: { $0.keys.first == model.reuseIdentifier }), let result = caches.remove(at: index).values.first {
             cell = result
-        } else if let result = (model.cellClass as AnyClass).alloc() as? AnyListScrollViewCell {
+        } else if let result = (model.cellClass as AnyClass).alloc() as? UIView {
             result.perform(#selector(UIView.init(frame:)), with: CGRect.zero)
             cell = result
         } else {
-            cell = EmptyListScrollViewCell()
+            cell = UIView()
         }
         addSubview(cell)
-        cell.setup(model)
+        model.setup(in: cell)
         return cell
     }
 
-    func cacheReusableCell(withCell cell: AnyListScrollViewCell, for model: AnyListViewCellModel) {
+    func cacheReusableCell(withCell cell: UIView, for model: AnyListViewCellModel) {
         caches.insert([model.reuseIdentifier: cell], at: 0)
         if caches.count > 10 {
             _ = caches.dropLast()
@@ -136,20 +136,5 @@ extension ListScrollView {
             }
         }
         setNeedsLayout()
-    }
-}
-
-// MARK: Empty View
-struct EmptyListScrollViewCellModel: ListViewCellModel {
-    typealias View = EmptyListScrollViewCell
-}
-
-class EmptyListScrollViewCell: ListScrollViewCell<EmptyListScrollViewCellModel> {
-    override class func contentHeight(for model: EmptyListScrollViewCellModel) -> CGFloat {
-        20
-    }
-
-    func setup(_ model: AnyListViewCellModel) {
-        backgroundColor = .white
     }
 }

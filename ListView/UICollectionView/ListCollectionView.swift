@@ -60,7 +60,7 @@ public class ListCollectionView: UIView {
 extension ListCollectionView {
     func reloadData(data: [AnyListViewCellModel]) {
         guard let newData = data as? [ListViewCellModelDifferentiable & AnyListViewCellModel],
-              let oldData = data as? [AnyDifferenceListViewCellModel] else {
+              let oldData = self.data as? [AnyDifferenceListViewCellModel] else {
             self.data = data
             collectionView.reloadData()
             return
@@ -94,7 +94,10 @@ extension ListCollectionView: UICollectionViewDataSource {
 
 extension ListCollectionView: UICollectionViewDelegateFlowLayout {
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        .init(width: collectionView.frame.width, height: data[indexPath.row].contentHeight(for: collectionView))
+        .init(
+            width: collectionView.frame.width,
+            height: data[indexPath.row].contentHeight(for: collectionView)
+        )
     }
 
     public func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {

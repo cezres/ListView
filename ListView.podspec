@@ -24,6 +24,5 @@ Pod::Spec.new do |spec|
 
   spec.dependency "DifferenceKit"
   spec.dependency "PromiseKit"
-
   
 end

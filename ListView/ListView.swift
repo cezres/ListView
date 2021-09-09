@@ -6,14 +6,3 @@
 //
 
 import UIKit
-
-protocol ListView {
-    var items: [[AnyListViewCellModel]] { get set }
-
-    var dataSource: ListViewDataSource { get set }
-}
-
-extension ListView where Self: UICollectionView {
-    func reloadData(_ items: [[AnyListViewCellModel]]) {
-    }
-}

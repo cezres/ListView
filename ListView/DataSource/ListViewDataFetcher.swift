@@ -14,7 +14,7 @@ open class ListViewDataFetcher: ListViewDataSource {
         case noMoreData
     }
 
-    open private(set) var items = [AnyListViewCellModel]()
+    public private(set) var items = [AnyListViewCellModel]()
 
     public private(set) var hasMoreData = false
 
@@ -23,6 +23,9 @@ open class ListViewDataFetcher: ListViewDataSource {
     public private(set) var start = 0
 
     public var limit = 10
+
+    public init() {
+    }
 
     @discardableResult
     open func refresh() -> Promise<[AnyListViewCellModel]> {
@@ -33,14 +36,14 @@ open class ListViewDataFetcher: ListViewDataSource {
         loading = true
         return .init { (resolver) in
             fetch(start: 0, limit: limit).done { result in
-                self.hasMoreData = result.count >= self.limit
+                self.hasMoreData = !result.isEmpty
                 self.start = result.count
                 self.items = result
-                resolver.fulfill(result)
-            }.catch { error in
-                resolver.reject(error)
-            }.finally {
                 self.loading = false
+                resolver.fulfill(self.items)
+            }.catch { error in
+                self.loading = false
+                resolver.reject(error)
             }
         }
     }
@@ -57,14 +60,14 @@ open class ListViewDataFetcher: ListViewDataSource {
         loading = true
         return .init { (resolver) in
             fetch(start: start, limit: limit).done { result in
-                self.hasMoreData = result.count > 0
+                self.hasMoreData = !result.isEmpty
                 self.start += result.count
                 self.items += result
-                resolver.fulfill(result)
-            }.catch { error in
-                resolver.reject(error)
-            }.finally {
                 self.loading = false
+                resolver.fulfill(self.items)
+            }.catch { error in
+                self.loading = false
+                resolver.reject(error)
             }
         }
     }

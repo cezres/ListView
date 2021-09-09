@@ -13,11 +13,15 @@ public protocol ListViewCellModelDifferentiable {
 }
 
 struct AnyDifferenceListViewCellModel: AnyListViewCellModel, Hashable, Differentiable {
+    func setup(in view: UIView) {
+        model.setup(in: view)
+    }
+
     var reuseIdentifier: String {
         model.reuseIdentifier
     }
 
-    var cellClass: AnyListViewCell.Type {
+    var cellClass: UIView.Type {
         model.cellClass
     }
 
