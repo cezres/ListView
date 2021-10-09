@@ -28,6 +28,8 @@ class ListScrollView: UIScrollView {
         } else if let result = (model.cellClass as AnyClass).alloc() as? UIView {
             result.perform(#selector(UIView.init(frame:)), with: CGRect.zero)
             cell = result
+            cell.isUserInteractionEnabled = true
+            cell.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectItem(_:))))
         } else {
             cell = UIView()
         }
@@ -37,6 +39,14 @@ class ListScrollView: UIScrollView {
     }
 
     func cacheReusableCell(withCell cell: UIView, for model: AnyListViewCellModel) {
+    @objc func didSelectItem(_ gesture: UIGestureRecognizer) {
+        guard let index = cells.firstIndex(where: { $0 == gesture.view }) else {
+            return
+        }
+        data[index].didSelectItem()
+        endEditing(true)
+    }
+
         caches.insert([model.reuseIdentifier: cell], at: 0)
         if caches.count > 10 {
             _ = caches.dropLast()
