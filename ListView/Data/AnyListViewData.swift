@@ -1,5 +1,5 @@
 //
-//  AnyListViewCellModel.swift
+//  AnyListViewData.swift
 //  ListView
 //
 //  Created by azusa on 2021/8/13.
@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-public protocol AnyListViewCellModel {
+public protocol AnyListViewData {
     var reuseIdentifier: String { get }
 
     var cellClass: UIView.Type { get }
@@ -17,10 +17,10 @@ public protocol AnyListViewCellModel {
 
     func didSelectItem()
 
-    func setup(in view: UIView)
+    func setupView(_ view: UIView)
 }
 
-extension AnyListViewCellModel {
+extension AnyListViewData {
     public var reuseIdentifier: String { String(describing: Self.self) }
 
     public func didSelectItem() {}

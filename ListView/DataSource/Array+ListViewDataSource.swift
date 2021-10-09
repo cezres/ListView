@@ -8,12 +8,12 @@
 import Foundation
 import PromiseKit
 
-extension Array: ListViewDataSource where Element: AnyListViewCellModel {
-    public var items: [AnyListViewCellModel] { self }
+extension Array: ListViewDataSource where Element == AnyListViewData {
+    public var items: [AnyListViewData] { self }
 
     public var hasMoreData: Bool { false }
 
-    public func refresh() -> Promise<[AnyListViewCellModel]> { .init(resolver: { $0.fulfill(items) }) }
+    public func refresh() -> Promise<[AnyListViewData]> { .init(resolver: { $0.fulfill(items) }) }
 
-    public func loadMore() -> Promise<[AnyListViewCellModel]> { .init(resolver: { $0.fulfill(items) }) }
+    public func loadMore() -> Promise<[AnyListViewData]> { .init(resolver: { $0.fulfill(items) }) }
 }

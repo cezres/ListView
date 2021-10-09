@@ -8,22 +8,21 @@
 import UIKit
 import DifferenceKit
 
-public class ListScrollView: UIView {
-    public var dataSource: [AnyListViewCellModel] = [] {
+class ListScrollView: UIScrollView {
+    var dataSource: [AnyListViewData] = [] {
         didSet {
             reloadData(data: dataSource)
         }
     }
 
-    private var data: [AnyListViewCellModel] = []
+    var data: [AnyListViewData] = []
 
-    private var cells: [UIView] = []
+    var cells: [UIView] = []
 
     private var caches: [[String: UIView]] = []
 
-    func dequeueReusableCell(withModel model: AnyListViewCellModel) -> UIView {
+    func dequeueReusableCell(withModel model: AnyListViewData) -> UIView {
         let cell: UIView
-
         if let index = caches.firstIndex(where: { $0.keys.first == model.reuseIdentifier }), let result = caches.remove(at: index).values.first {
             cell = result
         } else if let result = (model.cellClass as AnyClass).alloc() as? UIView {
@@ -33,7 +32,7 @@ public class ListScrollView: UIView {
             cell = UIView()
         }
         addSubview(cell)
-        model.setup(in: cell)
+        model.setupView(cell)
         return cell
     }
 
@@ -59,15 +58,15 @@ public class ListScrollView: UIView {
 
 // MARK: Load Data
 extension ListScrollView {
-    func reloadData(data: [AnyListViewCellModel]) {
+    func reloadData(data: [AnyListViewData]) {
         if case .none = window {
             cells.enumerated().forEach {
                 cacheReusableCell(withCell: $0.element, for: self.data[$0.offset])
                 $0.element.removeFromSuperview()
             }
 
-            if let data = data as? [ListViewCellModelDifferentiable & AnyListViewCellModel] {
-                self.data = data.map { AnyDifferenceListViewCellModel(model: $0) }
+            if let data = data as? [ListViewDataDifferentiable & AnyListViewData] {
+                self.data = data.map { AnyDifferenceListViewData(model: $0) }
             } else {
                 self.data = data
             }
@@ -76,8 +75,8 @@ extension ListScrollView {
             return
         }
 
-        guard let newData = data as? [ListViewCellModelDifferentiable & AnyListViewCellModel],
-              let oldData = data as? [AnyDifferenceListViewCellModel] else {
+        guard let newData = data as? [ListViewDataDifferentiable & AnyListViewData],
+              let oldData = self.data as? [AnyDifferenceListViewData] else {
             cells.enumerated().forEach {
                 cacheReusableCell(withCell: $0.element, for: self.data[$0.offset])
                 $0.element.removeFromSuperview()
@@ -92,14 +91,14 @@ extension ListScrollView {
         let changeset = StagedChangeset(
             source: oldData,
             target: newData.map {
-                AnyDifferenceListViewCellModel(model: $0)
+                AnyDifferenceListViewData(model: $0)
             }
         )
 
         reload(using: changeset)
     }
 
-    func reload(using stagedChangeset: StagedChangeset<[AnyDifferenceListViewCellModel]>) {
+    func reload(using stagedChangeset: StagedChangeset<[AnyDifferenceListViewData]>) {
         for changeset in stagedChangeset {
             let oldData = data
             data = changeset.data

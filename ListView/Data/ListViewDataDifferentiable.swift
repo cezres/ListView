@@ -8,13 +8,13 @@
 import UIKit
 import DifferenceKit
 
-public protocol ListViewCellModelDifferentiable {
+public protocol ListViewDataDifferentiable {
     func hash(into hasher: inout Hasher)
 }
 
-struct AnyDifferenceListViewCellModel: AnyListViewCellModel, Hashable, Differentiable {
-    func setup(in view: UIView) {
-        model.setup(in: view)
+struct AnyDifferenceListViewData: AnyListViewData, Hashable, Differentiable {
+    func setupView(_ view: UIView) {
+        model.setupView(view)
     }
 
     var reuseIdentifier: String {
@@ -33,7 +33,7 @@ struct AnyDifferenceListViewCellModel: AnyListViewCellModel, Hashable, Different
         model.didSelectItem()
     }
 
-    static func == (lhs: AnyDifferenceListViewCellModel, rhs: AnyDifferenceListViewCellModel) -> Bool {
+    static func == (lhs: AnyDifferenceListViewData, rhs: AnyDifferenceListViewData) -> Bool {
         lhs.hashValue == rhs.hashValue
     }
 
@@ -41,5 +41,5 @@ struct AnyDifferenceListViewCellModel: AnyListViewCellModel, Hashable, Different
         model.hash(into: &hasher)
     }
 
-    let model: AnyListViewCellModel & ListViewCellModelDifferentiable
+    let model: AnyListViewData & ListViewDataDifferentiable
 }

@@ -14,7 +14,7 @@ open class ListViewDataFetcher: ListViewDataSource {
         case noMoreData
     }
 
-    public private(set) var items = [AnyListViewCellModel]()
+    public private(set) var items = [AnyListViewData]()
 
     public private(set) var hasMoreData = false
 
@@ -28,7 +28,7 @@ open class ListViewDataFetcher: ListViewDataSource {
     }
 
     @discardableResult
-    open func refresh() -> Promise<[AnyListViewCellModel]> {
+    open func refresh() -> Promise<[AnyListViewData]> {
         guard !loading else {
             return .init(error: Error.loading)
         }
@@ -49,7 +49,7 @@ open class ListViewDataFetcher: ListViewDataSource {
     }
 
     @discardableResult
-    open func loadMore() -> Promise<[AnyListViewCellModel]> {
+    open func loadMore() -> Promise<[AnyListViewData]> {
         guard hasMoreData else {
             return .init(error: Error.noMoreData)
         }
