@@ -9,51 +9,51 @@ import UIKit
 import ListView
 
 class ScrollViewExanpleViewController: UIViewController {
-    let scrollView = ListScrollView()
+    let listView = ListView.scrollView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         view.backgroundColor = .white
-        view.addSubview(scrollView)
-        scrollView.snp.makeConstraints {
+        view.addSubview(listView)
+        listView.snp.makeConstraints {
             $0.left.right.equalToSuperview()
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
         }
 
-        scrollView.dataSource = [
-            ColorCellModel(color: .black),
-            ColorCellModel(color: .orange),
-            TextCellModel(text: "AA"),
-            TextCellModel(text: "BB"),
-            ColorCellModel(color: .cyan),
-            ColorCellModel(color: .green)
+        listView.dataSource = [
+            ColorListViewCellModel(color: .black),
+            ColorListViewCellModel(color: .orange),
+            TextListViewCellModel(text: "AA"),
+            TextListViewCellModel(text: "BB"),
+            ColorListViewCellModel(color: .cyan),
+            ColorListViewCellModel(color: .green)
         ]
 
-        self.scrollView.dataSource = [
-            ColorCellModel(color: .black),
-            ColorCellModel(color: .orange),
-            TextCellModel(text: "AA"),
-            TextCellModel(text: "CC"),
-            ColorCellModel(color: .cyan),
-            ColorCellModel(color: .green)
+        listView.dataSource = [
+            ColorListViewCellModel(color: .black),
+            ColorListViewCellModel(color: .orange),
+            TextListViewCellModel(text: "AA"),
+            TextListViewCellModel(text: "CC"),
+            ColorListViewCellModel(color: .cyan),
+            ColorListViewCellModel(color: .green)
         ]
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            self.scrollView.dataSource = [
-                ColorCellModel(color: .orange),
-                ColorCellModel(color: .black),
-                ColorCellModel(color: .red),
-                TextCellModel(text: "CC"),
-                TextCellModel(text: "DD")
+            self.listView.dataSource = [
+                ColorListViewCellModel(color: .orange),
+                ColorListViewCellModel(color: .black),
+                ColorListViewCellModel(color: .red),
+                TextListViewCellModel(text: "CC"),
+                TextListViewCellModel(text: "DD")
             ]
         }
     }
 }
 
-private struct ColorCellModel: ListViewCellModel, ListViewCellModelDifferentiable {
+private struct ColorListViewCellModel: ListViewCellModel, ListViewCellModelDifferentiable {
     typealias View = UIView
 
     let color: UIColor
@@ -66,12 +66,16 @@ private struct ColorCellModel: ListViewCellModel, ListViewCellModelDifferentiabl
         100
     }
 
-    func setup(in view: UIView) {
+    func setupView(_ view: UIView) {
         view.backgroundColor = color
+    }
+
+    func didSelectItem() {
+        print("\(reuseIdentifier)  \(self)")
     }
 }
 
-private struct TextCellModel: ListViewCellModel, ListViewCellModelDifferentiable {
+private struct TextListViewCellModel: ListViewCellModel, ListViewCellModelDifferentiable {
     typealias View = TextView
 
     func hash(into hasher: inout Hasher) {
@@ -82,8 +86,12 @@ private struct TextCellModel: ListViewCellModel, ListViewCellModelDifferentiable
         44
     }
 
-    func setup(in view: TextView) {
+    func setupView(_ view: TextView) {
         view.textLabel.text = text
+    }
+
+    func didSelectItem() {
+        print("\(reuseIdentifier)  \(self)")
     }
 
     let text: String

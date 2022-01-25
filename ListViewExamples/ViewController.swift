@@ -11,19 +11,19 @@ import DifferenceKit
 import SnapKit
 
 class ViewController: UIViewController {
-    lazy var tableView = ListTableView(frame: view.bounds)
+    lazy var listView = ListView.tableView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         title = "Examples"
         view.backgroundColor = .white
-        view.addSubview(tableView)
-        tableView.snp.makeConstraints {
+        view.addSubview(listView)
+        listView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
 
-        tableView.dataSource = [
+        listView.dataSource = [
             ExampleCellModel(text: "UIScrollView", action: { [weak self] in
                 self?.navigationController?.pushViewController(ScrollViewExanpleViewController(), animated: true)
             }),
@@ -41,7 +41,7 @@ struct ExampleCellModel: ListViewCellModel {
         64
     }
 
-    func setup(in view: UITableViewCell) {
+    func setupView(_ view: UITableViewCell) {
         view.textLabel?.text = text
     }
 

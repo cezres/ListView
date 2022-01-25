@@ -8,17 +8,17 @@
 import Foundation
 import UIKit
 
-public protocol ListViewData: AnyListViewData {
+public protocol ListViewCellModel: AnyListViewCellModel {
     associatedtype View: UIView
 
     func setupView(_ view: View)
 }
 
-extension ListViewData {
+extension ListViewCellModel {
     public var cellClass: UIView.Type { View.self }
 
     public func setupView(_ view: UIView) {
-        if let differenceModel = self as? AnyDifferenceListViewData {
+        if let differenceModel = self as? AnyDifferenceListViewCellModel {
             differenceModel.model.setupView(view)
         } else if let view = view as? View {
             setupView(view)

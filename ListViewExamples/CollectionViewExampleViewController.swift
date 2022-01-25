@@ -11,19 +11,33 @@ import PromiseKit
 
 class CollectionViewExampleViewController: UIViewController {
 
-    let collectionView = ListCollectionView()
+    let listView = ListView.collectionView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         view.backgroundColor = .white
-        view.addSubview(collectionView)
-        collectionView.snp.makeConstraints {
+        view.addSubview(listView)
+        listView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
 
-        collectionView.dataSource = UUIDListDataFetcher()
+//        listView.dataSource = UUIDListDataFetcher()
+
+        listView.dataSource = [
+            UUIDCellModel(hash: "111"),
+            UUIDCellModel(hash: "222"),
+            UUIDCellModel(hash: "333")
+        ]
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            self.listView.dataSource = [
+                UUIDCellModel(hash: "444"),
+                UUIDCellModel(hash: "555"),
+                UUIDCellModel(hash: "666")
+            ]
+        }
     }
 }
 
@@ -39,14 +53,14 @@ struct UUIDCellModel: ListViewCellModel, ListViewCellModelDifferentiable {
     typealias View = UUIDCollectionViewCell
 
     func contentHeight(for contentView: UIView) -> CGFloat {
-        44
+        88
     }
 
     func hash(into hasher: inout Hasher) {
         hasher.combine(hash)
     }
 
-    func setup(in view: UUIDCollectionViewCell) {
+    func setupView(_ view: UUIDCollectionViewCell) {
         view.textLabel.text = hash
     }
 

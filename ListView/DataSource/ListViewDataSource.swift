@@ -8,11 +8,11 @@
 import class PromiseKit.Promise
 
 public protocol ListViewDataSource {
-    var items: [AnyListViewData] { get }
+    var items: [AnyListViewCellModel] { get }
 
     var hasMoreData: Bool { get }
 
-    func refresh() -> Promise<[AnyListViewData]>
+    func refresh() -> Promise<[AnyListViewCellModel]>
 
-    func loadMore() -> Promise<[AnyListViewData]>
+    func loadMore() -> Promise<[AnyListViewCellModel]>
 }

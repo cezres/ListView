@@ -14,9 +14,33 @@ open class ListViewDataFetcher: ListViewDataSource {
         case noMoreData
     }
 
-    public private(set) var items = [AnyListViewData]()
+    public private(set) var items = [AnyListViewCellModel]()
 
-    public private(set) var hasMoreData = false
+    public var headerItems: [AnyListViewCellModel]? {
+        didSet {
+            items = customListViewCellModel(items: dataList)
+        }
+    }
+
+    public var footerItems: [AnyListViewCellModel]? {
+        didSet {
+            items = customListViewCellModel(items: dataList)
+        }
+    }
+
+    public var emptyCellModel: AnyListViewCellModel? {
+        didSet {
+            items = customListViewCellModel(items: dataList)
+        }
+    }
+
+    private var dataList = [AnyListViewCellModel]() {
+        didSet {
+            items = customListViewCellModel(items: dataList)
+        }
+    }
+
+    public private(set) var hasMoreData = true
 
     public private(set) var loading = false
 
@@ -28,7 +52,7 @@ open class ListViewDataFetcher: ListViewDataSource {
     }
 
     @discardableResult
-    open func refresh() -> Promise<[AnyListViewData]> {
+    open func refresh() -> Promise<[AnyListViewCellModel]> {
         guard !loading else {
             return .init(error: Error.loading)
         }
@@ -38,7 +62,7 @@ open class ListViewDataFetcher: ListViewDataSource {
             fetch(start: 0, limit: limit).done { result in
                 self.hasMoreData = !result.isEmpty
                 self.start = result.count
-                self.items = result
+                self.dataList = result
                 self.loading = false
                 resolver.fulfill(self.items)
             }.catch { error in
@@ -49,7 +73,7 @@ open class ListViewDataFetcher: ListViewDataSource {
     }
 
     @discardableResult
-    open func loadMore() -> Promise<[AnyListViewData]> {
+    open func loadMore() -> Promise<[AnyListViewCellModel]> {
         guard hasMoreData else {
             return .init(error: Error.noMoreData)
         }
@@ -62,7 +86,8 @@ open class ListViewDataFetcher: ListViewDataSource {
             fetch(start: start, limit: limit).done { result in
                 self.hasMoreData = !result.isEmpty
                 self.start += result.count
-                self.items += result
+                self.dataList += result
+                self.items = self.customListViewCellModel(items: self.dataList)
                 self.loading = false
                 resolver.fulfill(self.items)
             }.catch { error in
@@ -74,5 +99,21 @@ open class ListViewDataFetcher: ListViewDataSource {
 
     open func fetch(start: Int, limit: Int) -> Promise<[AnyListViewCellModel]> {
         fatalError("fetch(start:limit:) has not been implemented")
+    }
+
+    open func customListViewCellModel(items: [AnyListViewCellModel]) -> [AnyListViewCellModel] {
+        if items.isEmpty, let emptyCellModel = emptyCellModel {
+            return buildHeaderListViewCellModels() + [emptyCellModel] + buildFooterListViewCellModels()
+        } else {
+            return buildHeaderListViewCellModels() + items + buildFooterListViewCellModels()
+        }
+    }
+
+    open func buildHeaderListViewCellModels() -> [AnyListViewCellModel] {
+        return headerItems ?? []
+    }
+
+    open func buildFooterListViewCellModels() -> [AnyListViewCellModel] {
+        return footerItems ?? []
     }
 }
