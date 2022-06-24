@@ -25,6 +25,14 @@ class ListScrollView: UIScrollView {
         let cell: UIView
         if let index = caches.firstIndex(where: { $0.keys.first == model.reuseIdentifier }), let result = caches.remove(at: index).values.first {
             cell = result
+        } else if let result = model as? UIView {
+            cell = result
+            cell.isUserInteractionEnabled = true
+            cell.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectItem(_:))))
+        } else if let model = model as? AnyDifferenceListViewCellModel, let result = model.model as? UIView {
+            cell = result
+            cell.isUserInteractionEnabled = true
+            cell.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSelectItem(_:))))
         } else if let result = (model.cellClass as AnyClass).alloc() as? UIView {
             result.perform(#selector(UIView.init(frame:)), with: CGRect(x: 0, y: 0, width: 200, height: 100))
             cell = result

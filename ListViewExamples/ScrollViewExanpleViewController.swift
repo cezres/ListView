@@ -38,7 +38,8 @@ class ScrollViewExanpleViewController: UIViewController {
             TextListViewCellModel(text: "AA"),
             TextListViewCellModel(text: "CC"),
             ColorListViewCellModel(color: .cyan),
-            ColorListViewCellModel(color: .green)
+            ColorListViewCellModel(color: .green),
+            View123(color: .blue),
         ]
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
@@ -47,9 +48,47 @@ class ScrollViewExanpleViewController: UIViewController {
                 ColorListViewCellModel(color: .black),
                 ColorListViewCellModel(color: .red),
                 TextListViewCellModel(text: "CC"),
-                TextListViewCellModel(text: "DD")
+                TextListViewCellModel(text: "DD"),
+                View123(color: .blue),
             ]
         }
+    }
+}
+
+extension ListViewCellModel where Self: UIView {
+    typealias View = Self
+
+    public func setupView(_ view: Self) {
+    }
+}
+
+extension ListViewCellModel {
+    func invalidateIntrinsicContentHeight() {
+        
+    }
+}
+
+private class View123: UIView, ListViewCellModel, ListViewCellModelDifferentiable {
+//    typealias View = View123
+
+    func contentHeight(for contentView: UIView) -> CGFloat {
+        44
+    }
+    
+    init(color: UIColor) {
+        super.init(frame: .init(x: 0, y: 0, width: 0, height: 0))
+        backgroundColor = color
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override var hash: Int {
+        var hasher = Hasher()
+        hasher.combine(type(of: self).description())
+        hasher.combine(backgroundColor)
+        return hasher.finalize()
     }
 }
 
