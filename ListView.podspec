@@ -13,8 +13,8 @@ Pod::Spec.new do |spec|
 
   spec.swift_version            = '5'
   spec.module_name              = 'ListView'
-  spec.platform                 = :ios, "10.0"
-  spec.ios.deployment_target    = "10.0"
+  spec.platform                 = :ios, "13.0"
+  spec.ios.deployment_target    = "13.0"
 
 
   spec.source               = { :git => "https://github.com/cezres/ListView.git", :tag => "#{spec.version}" }

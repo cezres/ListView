@@ -7,6 +7,9 @@ use_frameworks!
 
 pod 'DifferenceKit'
 pod 'PromiseKit'
+pod 'RxSwift'
+pod 'RxCocoa'
+pod 'RxRelay'
 
 target 'ListView' do
 end

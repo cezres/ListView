@@ -87,7 +87,6 @@ open class ListViewDataFetcher: ListViewDataSource {
                 self.hasMoreData = !result.isEmpty
                 self.start += result.count
                 self.dataList += result
-                self.items = self.customListViewCellModel(items: self.dataList)
                 self.loading = false
                 resolver.fulfill(self.items)
             }.catch { error in

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A9F21322881671900E16230 /* AsyncListViewDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9F21312881671900E16230 /* AsyncListViewDataFetcher.swift */; };
 		7A75B2F726E9E2FE00A52349 /* CollectionViewExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A75B2F626E9E2FE00A52349 /* CollectionViewExampleViewController.swift */; };
 		7A7C7FFA26A54E85009190CA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7C7FF926A54E85009190CA /* AppDelegate.swift */; };
 		7A7C7FFC26A54E85009190CA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7C7FFB26A54E85009190CA /* SceneDelegate.swift */; };
@@ -57,10 +58,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0A9F21312881671900E16230 /* AsyncListViewDataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncListViewDataFetcher.swift; sourceTree = "<group>"; };
 		1927814B4F96A40A358476EE /* Pods-ListViewExamples.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ListViewExamples.debug.xcconfig"; path = "Target Support Files/Pods-ListViewExamples/Pods-ListViewExamples.debug.xcconfig"; sourceTree = "<group>"; };
 		1F5B424F7332C8581158D2FB /* Pods_ListViewExamples.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ListViewExamples.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		605D54A19EBC9CFDD285D6DC /* Pods_ListView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ListView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7A75AF0926DF205E00A52349 /* ListView.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = ListView.podspec; sourceTree = "<group>"; };
+		7A75AF0926DF205E00A52349 /* ListView.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = ListView.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		7A75B2F626E9E2FE00A52349 /* CollectionViewExampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewExampleViewController.swift; sourceTree = "<group>"; };
 		7A7C7FE826A54E5F009190CA /* ListView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ListView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A7C7FEC26A54E5F009190CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 				7A99E93626D63336005BE102 /* ListViewDataSource.swift */,
 				7A99E93826D63358005BE102 /* ListViewDataFetcher.swift */,
 				7A99E93426D63321005BE102 /* Array+ListViewDataSource.swift */,
+				0A9F21312881671900E16230 /* AsyncListViewDataFetcher.swift */,
 			);
 			path = DataSource;
 			sourceTree = "<group>";
@@ -424,6 +427,7 @@
 				7A99E93726D63336005BE102 /* ListViewDataSource.swift in Sources */,
 				7AB3B6E827215AE400252564 /* AnyListViewCellModel.swift in Sources */,
 				7A7C801226A54EB6009190CA /* ListView.swift in Sources */,
+				0A9F21322881671900E16230 /* AsyncListViewDataFetcher.swift in Sources */,
 				7AB3B6E727215AE400252564 /* ListViewCellModelDifferentiable.swift in Sources */,
 				7A7C802226A5637E009190CA /* UITableViewExtensions.swift in Sources */,
 				7A99E93526D63321005BE102 /* Array+ListViewDataSource.swift in Sources */,
@@ -608,6 +612,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = ListView/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -635,6 +640,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = ListView/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
