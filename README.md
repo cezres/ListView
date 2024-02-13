@@ -24,15 +24,15 @@ struct UUIDCellModel: ListViewCellModel, ListViewCellModelDifferentiable {
 
     /// 可选实现 ListViewCellModelDifferentiable 协议以支持数据源差异计算。
     func hash(into hasher: inout Hasher) {
-        hasher.combine(hash)
+        hasher.combine(uuid)
     }
 
     /// 使用当前 Model 更新视图数据
     func setupView(_ view: UUIDCollectionViewCell) {
-        view.textLabel.text = hash
+        view.textLabel.text = uuid
     }
 
-    let hash: String
+    let uuid: String
 }
 
 class UUIDCollectionViewCell: UICollectionViewCell {
